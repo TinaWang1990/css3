@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Home</title>
+    <style>
+        .web {
+            text-align: center;
+            position: relative;
+            margin: auto;
+        }
+
+        .content {
+            text-align: center;
+            color: black;
+            font-size: 30px;
+            z-index: 3;
+            position: absolute;
+            top: 200px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<div class="web">
+
+    <canvas id="canvas" style="background-color: grey;">
+
+    </canvas>
+    <div class="content">
+        <p id="one">one</p>
+        <p id="two">two</p>
+    </div>
+
+</div>
+
+<body>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+            var mouse = {};
+            var wid = window.innerWidth;
+            var hei = window.innerHeight;
+            var src;
+
+            canvas.width = wid;
+            canvas.height = hei;
+
+
+            $('#one').mouseover(function() {
+                src = 'https://images.wallpaperscraft.com/image/pond_evening_grass_123679_1600x1200.jpg';
+            });
+
+            $('#two').mouseover(function() {
+                src = 'https://images.wallpaperscraft.com/image/pond_grass_ice_winter_frost_freshness_silence_evening_frozen_53200_1600x1200.jpg';
+            });
+            window.addEventListener('mousemove', function(e) {
+                mouse.x = e.x;
+                mouse.y = e.y;
+
+                var img = new Image();
+
+
+                img.src = src;
+                img.onload = function() {
+
+                    var pattern = ctx.createPattern(img, 'no-repeat');
+                    ctx.fillStyle = pattern;
+                    ctx.clearRect(0, 0, wid, hei);
+                    ctx.beginPath();
+                    ctx.arc(mouse.x, mouse.y, 200, 0, 2 * Math.PI);
+                    ctx.fillStyle = pattern;
+                    ctx.fill();
+                    ctx.closePath();
+                };
+
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
